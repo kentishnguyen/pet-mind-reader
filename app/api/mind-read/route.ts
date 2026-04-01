@@ -3,22 +3,35 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
 
-const PROMPT = `You are a hilarious pet mind reader! Look at this pet photo and tell me exactly what this animal is thinking RIGHT NOW.
+const PROMPT = `You are a hilarious pet mind reader! Look at this pet photo and tell me exactly what the animal(s) are thinking RIGHT NOW.
 
-Rules:
+IMPORTANT: First, count how many pets are in the image.
+
+If there is ONLY ONE pet:
+- Write a single funny thought in first person (2-3 sentences)
+- Return it as a JSON object: {"type": "single", "thought": "the thought here"}
+
+If there are MULTIPLE pets (2 or more):
+- Create a hilarious conversation between them
+- Each pet gets 1-2 short, punchy lines
+- They should be responding to each other in a funny way
+- Return as JSON: {"type": "conversation", "messages": [{"pet": "Dog", "thought": "..."}, {"pet": "Cat", "thought": "..."}, ...]}
+- Identify each pet by type (Dog, Cat, Bird, etc.) or by a distinguishing feature (Orange Cat, Black Dog, etc.)
+
+Rules for ALL responses:
 - Be FUNNY and creative - the more absurd the better!
-- Write in first person as if YOU are the pet
-- Keep it to 2-3 short, punchy sentences
-- Include their "secret thoughts" about treats, naps, world domination, judging humans, etc.
-- If you see a dog, they might be thinking about food, walks, or their favorite human
-- If you see a cat, they're probably plotting something or judging everyone
-- Any other pet - get creative with their personality!
+- Include thoughts about treats, naps, world domination, judging humans, etc.
+- Dogs think about food, walks, or their favorite human
+- Cats are plotting something or judging everyone
 - Use casual, playful language
 - NO emojis in the response
-- If you see more than one pet, create thoughts for each of them 
+- ONLY return valid JSON, nothing else
 
-Example format:
-"I've been waiting for my treat for exactly 47 seconds. This is a war crime. I will remember this betrayal."
+Example single pet:
+{"type": "single", "thought": "I've been waiting for my treat for exactly 47 seconds. This is a war crime."}
+
+Example multiple pets:
+{"type": "conversation", "messages": [{"pet": "Golden Retriever", "thought": "Did someone say walk?! WALK?!"}, {"pet": "Cat", "thought": "Pathetic. I would never show such desperate enthusiasm."}, {"pet": "Golden Retriever", "thought": "You literally sprint to the food bowl every time it rattles."}]}
 
 Now read this pet's mind!`
 
@@ -40,8 +53,42 @@ export async function POST(req: Request) {
       PROMPT,
     ])
 
-    const thought = result.response.text().trim()
-    return Response.json({ thought })
+    const responseText = result.response.text().trim()
+    
+    // Try to parse as JSON
+    try {
+      // Clean up the response - remove markdown code blocks if present
+      let cleanedResponse = responseText
+      if (responseText.startsWith('```json')) {
+        cleanedResponse = responseText.slice(7)
+      } else if (responseText.startsWith('```')) {
+        cleanedResponse = responseText.slice(3)
+      }
+      if (cleanedResponse.endsWith('```')) {
+        cleanedResponse = cleanedResponse.slice(0, -3)
+      }
+      cleanedResponse = cleanedResponse.trim()
+      
+      const parsed = JSON.parse(cleanedResponse)
+      
+      if (parsed.type === 'conversation' && Array.isArray(parsed.messages)) {
+        return Response.json({ 
+          type: 'conversation', 
+          messages: parsed.messages 
+        })
+      } else if (parsed.type === 'single' && parsed.thought) {
+        return Response.json({ 
+          type: 'single', 
+          thought: parsed.thought 
+        })
+      }
+      
+      // Fallback if structure is unexpected
+      return Response.json({ type: 'single', thought: responseText })
+    } catch {
+      // If JSON parsing fails, treat as single thought
+      return Response.json({ type: 'single', thought: responseText })
+    }
   } catch (err) {
     console.error('Gemini error:', err)
     return Response.json({ error: 'Failed to read pet mind' }, { status: 500 })
