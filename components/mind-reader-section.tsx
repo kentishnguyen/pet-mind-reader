@@ -5,12 +5,20 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Sparkles, RefreshCw, Brain } from "lucide-react"
 import { PhotoUploader } from "./photo-uploader"
 import { ThoughtBubble } from "./thought-bubble"
+import { ConversationBubbles } from "./conversation-bubbles"
 import { CartoonDog, CartoonCat, FloatingPaw } from "./cartoon-animals"
+
+interface ConversationMessage {
+  pet: string
+  thought: string
+}
 
 export function MindReaderSection() {
   const [image, setImage] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
   const [thought, setThought] = useState<string | null>(null)
+  const [conversation, setConversation] = useState<ConversationMessage[] | null>(null)
+  const [responseType, setResponseType] = useState<'single' | 'conversation' | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -18,6 +26,8 @@ export function MindReaderSection() {
     setImage(file)
     setPreview(previewUrl)
     setThought(null)
+    setConversation(null)
+    setResponseType(null)
     setError(null)
   }, [])
 
@@ -25,6 +35,8 @@ export function MindReaderSection() {
     setImage(null)
     setPreview(null)
     setThought(null)
+    setConversation(null)
+    setResponseType(null)
     setError(null)
   }, [])
 
@@ -33,6 +45,9 @@ export function MindReaderSection() {
 
     setIsLoading(true)
     setError(null)
+    setThought(null)
+    setConversation(null)
+    setResponseType(null)
 
     try {
       const formData = new FormData()
@@ -48,7 +63,14 @@ export function MindReaderSection() {
       }
 
       const data = await response.json()
-      setThought(data.thought)
+      
+      if (data.type === 'conversation' && Array.isArray(data.messages)) {
+        setConversation(data.messages)
+        setResponseType('conversation')
+      } else {
+        setThought(data.thought)
+        setResponseType('single')
+      }
     } catch (err) {
       setError('Oops! Could not read this pet\'s mind. Try again!')
       console.error(err)
@@ -59,6 +81,8 @@ export function MindReaderSection() {
 
   const tryAgain = () => {
     setThought(null)
+    setConversation(null)
+    setResponseType(null)
     readMind()
   }
 
@@ -144,7 +168,7 @@ export function MindReaderSection() {
                     )}
                   </motion.button>
 
-                  {thought && (
+                  {(thought || conversation) && (
                     <motion.button
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -190,7 +214,38 @@ export function MindReaderSection() {
                     <CartoonCat className="h-32 w-32 drop-shadow-lg" />
                   </motion.div>
                 </motion.div>
-              ) : thought ? (
+              ) : responseType === 'conversation' && conversation ? (
+                <motion.div
+                  key="conversation"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="w-full"
+                >
+                  <ConversationBubbles messages={conversation} />
+                  
+                  {/* Multiple happy animals */}
+                  <motion.div
+                    className="mt-8 flex justify-center gap-4"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", delay: 0.5 }}
+                  >
+                    <motion.div
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ repeat: Infinity, duration: 2, delay: 0 }}
+                    >
+                      <CartoonDog className="h-20 w-20 drop-shadow-lg" />
+                    </motion.div>
+                    <motion.div
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ repeat: Infinity, duration: 2, delay: 0.3 }}
+                    >
+                      <CartoonCat className="h-20 w-20 drop-shadow-lg" />
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              ) : responseType === 'single' && thought ? (
                 <motion.div
                   key="result"
                   initial={{ opacity: 0 }}
