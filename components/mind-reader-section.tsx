@@ -315,7 +315,8 @@ export function MindReaderSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="mt-16 rounded-3xl bg-card p-8 shadow-lg"
+          id="examples"
+          className="mt-16 scroll-mt-24 rounded-3xl bg-card p-8 shadow-lg"
         >
           <h3 className="mb-6 text-center font-[family-name:var(--font-baloo)] text-2xl font-bold text-foreground">
             Recent Mind Readings
