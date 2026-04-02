@@ -57,8 +57,9 @@ export function WelcomeSection({ onGetStarted }: WelcomeSectionProps) {
           className="text-4xl md:text-6xl font-bold text-foreground mb-4 text-balance"
           style={{ fontFamily: 'var(--font-display)' }}
         >
-          <span className="text-coral">Neuro</span>
-          <span className="text-sky">PawsAI</span>
+          <span className="text-primary">Neuro</span>
+          <span className="text-secondary">Paws</span>
+          <span className="text-sky">AI</span>
         </motion.h1>
         
         {/* Subtitle */}
