@@ -7,17 +7,23 @@ import { FloatingPaw } from "./cartoon-animals"
 
 const footerLinks = {
   product: [
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "Examples", href: "#examples" },
-    { name: "FAQ", href: "#" },
+    { name: "How It Works", href: "https://youtu.be/dQw4w9WgXcQ?si=N9JSpzAeLn--aQAK" },
+    { name: "Examples", href: "https://youtu.be/J---aiyznGQ?si=8WkTd-qpmdC2lZdq" },
+    { name: "FAQ", href: "https://youtu.be/21YeWkTzCWk?si=oaC6yj4M30REdd7M" },
   ],
   support: [
-    { name: "Help Center", href: "#" },
-    { name: "Contact Us", href: "#" },
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
+    { name: "Help Center", href: "https://youtu.be/gu3KzCWoons?si=kf1_qcxf-EDq9B19" },
+    { name: "Contact Us", href: "https://youtu.be/QJ7jJvYXOcY?si=tOwTqKfJyfEQQ5Hq" },
+    { name: "Privacy Policy", href: "https://youtu.be/6_hl8AB7Uf0?si=98fF1TGR6N2Gks_k" },
+    { name: "Terms of Service", href: "https://youtu.be/ewf-8rx9_uQ?si=r6zW0Qoisgc6z-OI" },
   ],
 }
+
+const socialLinks = [
+  { name: "Twitter", href: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Mountain_Bluebird.jpg/500px-Mountain_Bluebird.jpg", icon: Twitter },
+  { name: "Instagram", href: "https://www.instagram.com/sfusurge/", icon: Instagram },
+  { name: "GitHub", href: "https://github.com/kentishnguyen/pet-mind-reader", icon: Github },
+]
 
 export function Footer() {
   return (
@@ -70,14 +76,17 @@ export function Footer() {
               are REALLY thinking. Prepare for laughs!
             </p>
             <div className="flex gap-4">
-              {[Twitter, Instagram, Github].map((Icon, index) => (
+              {socialLinks.map((social) => (
                 <motion.a
-                  key={index}
-                  href="#"
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
                 >
-                  <Icon className="h-5 w-5" />
+                  <social.icon className="h-5 w-5" />
                 </motion.a>
               ))}
             </div>
@@ -93,6 +102,8 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
                     {link.name}
@@ -111,6 +122,8 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
                     {link.name}
