@@ -14,15 +14,15 @@ export function WelcomeSection({ onGetStarted }: WelcomeSectionProps) {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-4">
       {/* Floating paws decoration */}
-      <FloatingPaw className="absolute top-20 left-10 w-12 h-12 text-coral opacity-30" delay={0} />
-      <FloatingPaw className="absolute top-40 right-16 w-10 h-10 text-mint opacity-30" delay={0.5} />
-      <FloatingPaw className="absolute bottom-32 left-20 w-14 h-14 text-sky opacity-30" delay={1} />
-      <FloatingPaw className="absolute bottom-40 right-10 w-8 h-8 text-bubblegum opacity-30" delay={1.5} />
-      <FloatingPaw className="absolute top-1/3 left-1/4 w-10 h-10 text-sunshine opacity-20" delay={2} />
-      <FloatingPaw className="absolute top-1/2 right-1/4 w-12 h-12 text-coral opacity-20" delay={2.5} />
+      <FloatingPaw className="pointer-events-none absolute top-20 left-10 w-12 h-12 text-coral opacity-30" delay={0} />
+      <FloatingPaw className="pointer-events-none absolute top-40 right-16 w-10 h-10 text-mint opacity-30" delay={0.5} />
+      <FloatingPaw className="pointer-events-none absolute bottom-32 left-20 w-14 h-14 text-sky opacity-30" delay={1} />
+      <FloatingPaw className="pointer-events-none absolute bottom-40 right-10 w-8 h-8 text-bubblegum opacity-30" delay={1.5} />
+      <FloatingPaw className="pointer-events-none absolute top-1/3 left-1/4 w-10 h-10 text-sunshine opacity-20" delay={2} />
+      <FloatingPaw className="pointer-events-none absolute top-1/2 right-1/4 w-12 h-12 text-coral opacity-20" delay={2.5} />
       
       {/* Main content */}
-      <div className="flex flex-col items-center text-center max-w-2xl">
+      <div className="relative z-20 flex flex-col items-center text-center max-w-2xl">
         {/* Speech bubble */}
         <motion.div
           initial={{ opacity: 0, y: -20, scale: 0.8 }}
@@ -77,7 +77,7 @@ export function WelcomeSection({ onGetStarted }: WelcomeSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
-          className="flex flex-col items-center gap-4"
+          className="relative z-30 flex flex-col items-center gap-4"
         >
           <Button
             onClick={onGetStarted}
@@ -102,7 +102,7 @@ export function WelcomeSection({ onGetStarted }: WelcomeSectionProps) {
       
       {/* Decorative elements */}
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-32 bg-gradient-to-t from-background to-transparent"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
@@ -112,7 +112,7 @@ export function WelcomeSection({ onGetStarted }: WelcomeSectionProps) {
       {[...Array(6)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 rounded-full bg-sunshine"
+          className="pointer-events-none absolute z-10 w-2 h-2 rounded-full bg-sunshine"
           style={{
             left: `${15 + i * 15}%`,
             top: `${20 + (i % 3) * 20}%`,
