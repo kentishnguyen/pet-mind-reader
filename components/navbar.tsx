@@ -48,8 +48,8 @@ export function Navbar() {
               <Brain className="h-6 w-6 text-primary-foreground" />
             </motion.div>
             <span className="font-[family-name:var(--font-baloo)] text-2xl font-bold">
-              <span className="text-primary">Pet</span>
-              <span className="text-secondary">Mind</span>
+              <span className="text-primary">NeuroPaws</span>
+              <span className="text-secondary">AI</span>
             </span>
           </Link>
 
