@@ -114,7 +114,7 @@ export function MindReaderSection() {
           </motion.div>
           
           <h1 className="mb-4 font-[family-name:var(--font-baloo)] text-4xl font-extrabold text-foreground md:text-5xl lg:text-6xl">
-            <span className="text-primary">Neuro</span>{" "}
+            <span className="text-primary">Neuro</span>
             <span className="text-secondary">Paws</span>
             <span className="text-sky">AI</span>
           </h1>
