@@ -15,8 +15,8 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: 'PawPals - Your Pet\'s Best Friend',
-  description: 'The cutest way to care for your furry friends!',
+  title: 'NeuroPawsAI',
+  description: 'AI-powered pet mind reading for hilarious photo reactions.',
   generator: 'v0.app',
   manifest: '/site.webmanifest',
   icons: {

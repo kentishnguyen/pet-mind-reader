@@ -91,7 +91,7 @@ export function PhotoUploader({ onImageSelect, preview, onClear }: PhotoUploader
               
               <div className="text-center">
                 <p className="font-[family-name:var(--font-baloo)] text-xl font-bold text-foreground">
-                  {isDragging ? "Drop it like it's hot!" : "Upload your pet's photo"}
+                  {isDragging ? "Drop it like it's hot!" : "Upload your photo for NeuroPawsAI"}
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
                   Drag and drop or click to browse

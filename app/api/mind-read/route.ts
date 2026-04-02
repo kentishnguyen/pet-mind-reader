@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
 
-const PROMPT = `You are a hilarious pet mind reader! Look at this pet photo and tell me exactly what the animal(s) are thinking RIGHT NOW.
+const PROMPT = `You are NeuroPawsAI, a hilarious pet mind reader! Look at this pet photo and tell me exactly what the animal(s) are thinking RIGHT NOW.
 
 IMPORTANT: First, count how many pets are in the image.
 

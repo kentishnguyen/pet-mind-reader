@@ -110,18 +110,18 @@ export function MindReaderSection() {
             className="mb-4 inline-flex items-center gap-2 rounded-full bg-bubblegum/20 px-4 py-2 text-sm font-semibold text-foreground"
           >
             <Brain className="h-4 w-4 text-primary" />
-            <span>AI-Powered Pet Telepathy</span>
+            <span>NeuroPawsAI</span>
           </motion.div>
           
           <h1 className="mb-4 font-[family-name:var(--font-baloo)] text-4xl font-extrabold text-foreground md:text-5xl lg:text-6xl">
-            <span className="text-primary">Pet</span>{" "}
-            <span className="text-secondary">Mind</span>{" "}
-            <span className="text-sky">Reader</span>
+            <span className="text-primary">Neuro</span>{" "}
+            <span className="text-secondary">Paws</span>
+            <span className="text-sky">AI</span>
           </h1>
           
           <p className="mx-auto max-w-xl text-lg text-muted-foreground">
             Ever wondered what your furry friend is REALLY thinking? 
-            Upload a photo and let our AI reveal their deepest, most hilarious thoughts!
+            Upload a photo and let NeuroPawsAI reveal their deepest, most hilarious thoughts!
           </p>
         </motion.div>
 
@@ -299,7 +299,7 @@ export function MindReaderSection() {
                   </div>
                   
                   <p className="font-[family-name:var(--font-baloo)] text-xl font-semibold text-muted-foreground">
-                    Upload a photo to discover what your pet is thinking!
+                    Upload a photo to get your NeuroPawsAI reading!
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground/70">
                     Works with dogs, cats, birds, hamsters, and more...

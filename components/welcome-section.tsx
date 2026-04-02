@@ -57,8 +57,8 @@ export function WelcomeSection({ onGetStarted }: WelcomeSectionProps) {
           className="text-4xl md:text-6xl font-bold text-foreground mb-4 text-balance"
           style={{ fontFamily: 'var(--font-display)' }}
         >
-          <span className="text-coral">Paw</span>
-          <span className="text-sky">Thoughts</span>
+          <span className="text-coral">Neuro</span>
+          <span className="text-sky">PawsAI</span>
         </motion.h1>
         
         {/* Subtitle */}
@@ -68,8 +68,7 @@ export function WelcomeSection({ onGetStarted }: WelcomeSectionProps) {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="text-lg md:text-xl text-muted-foreground mb-8 max-w-md leading-relaxed"
         >
-          Ever wondered what your furry friend is really thinking? 
-          Upload a photo and let our AI reveal their secret thoughts!
+          An AI Pet Mind Reader so you can bond more with your cute pets!
         </motion.p>
         
         {/* Get Started Button */}

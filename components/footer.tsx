@@ -43,10 +43,10 @@ export function Footer() {
           className="mb-16 rounded-3xl bg-primary/10 p-8 text-center md:p-12"
         >
           <h2 className="mb-4 font-[family-name:var(--font-baloo)] text-3xl font-bold text-foreground md:text-4xl">
-            Ready to read your pet&apos;s mind?
+            Ready for a NeuroPawsAI reading?
           </h2>
           <p className="mx-auto mb-6 max-w-md text-muted-foreground">
-            Upload a photo and discover the hilarious thoughts your furry friend has been hiding!
+            Upload a photo and discover the hilarious thoughts NeuroPawsAI finds in your furry friend!
           </p>
           <motion.a
             href="#"
@@ -67,13 +67,13 @@ export function Footer() {
                 <Brain className="h-6 w-6 text-primary-foreground" />
               </div>
               <span className="font-[family-name:var(--font-baloo)] text-2xl font-bold">
-                <span className="text-primary">Pet</span>
-                <span className="text-secondary">Mind</span>
+                <span className="text-primary">Neuro</span>
+                <span className="text-secondary">Paws</span>
+                <span className="text-sky">AI</span>
               </span>
             </Link>
             <p className="mb-4 max-w-sm text-muted-foreground">
-              The AI-powered pet mind reader that reveals what your furry friends 
-              are REALLY thinking. Prepare for laughs!
+              NeuroPawsAI reveals what your furry friends are REALLY thinking!
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
@@ -138,7 +138,7 @@ export function Footer() {
         <div className="border-t border-border py-6">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-sm text-muted-foreground">
-              2026 Pet Mind Reader. All rights reserved.
+              2026 NeuroPawsAI. All rights reserved.
             </p>
             <p className="flex items-center gap-1 text-sm text-muted-foreground">
               Made with <Heart className="h-4 w-4 text-primary" /> for pets everywhere
